@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var config = require('../config'); // get config file
+console.log(config);
 var twilio = require('twilio');
-var client = new twilio(process.env.TWILIO_ACCOUNT_SID || config.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTHTOKEN || config.TWILIO_AUTHTOKEN);
+var client = new twilio((process.env.TWILIO_ACCOUNT_SID || config.TWILIO_ACCOUNT_SID), (process.env.TWILIO_AUTHTOKEN || config.TWILIO_AUTHTOKEN));
 
 var VerifyToken = require('./VerifyToken');
 
@@ -98,7 +99,7 @@ router.post('/otp-login', function(req, res) {
             .then(() => {
               res.status(200).send({ msg: 'OTP Send Successflly To User', auth: 'pending', otp: user.otp });
             }).catch(err => {
-              res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed' })
+              res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed', more_info: err.more_info })
             });
       });
     } else {
@@ -113,7 +114,7 @@ router.post('/otp-login', function(req, res) {
               res.status(200).send({ msg: 'OTP Send Successflly To User', auth: 'pending', otp: user.otp });
             })
             .catch(err => {
-              res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed' })
+              res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed', more_info: err.more_info })
             });
           });
         }
@@ -165,7 +166,7 @@ router.post('/resend-otp', function(req, res) {
                 res.status(200).send({ msg: 'OTP Send Successflly To User', auth: 'pending', otp: user.otp });
               })
               .catch(err => {
-                res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed' })
+                res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed', more_info: err.more_info })
               });
           });
         }
@@ -179,7 +180,7 @@ router.post('/resend-otp', function(req, res) {
               res.status(200).send({ msg: 'OTP Send Successflly To User', auth: 'pending', otp: user.otp });
             })
             .catch(err => {
-              res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed' })
+              res.status(err.status || 503).send({ msg: err.message || 'OTP Service Unavailaible. Try Again in Some Time.', auth: 'failed', more_info: err.more_info })
             });
         }
   });

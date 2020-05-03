@@ -6,10 +6,9 @@ var bodyParser = require('body-parser');
 var app = express();
 var db = require('./db');
 var config = require('./config');
-
-global.__root   = __dirname + '/'; 
-var UserController = require(__root + 'user/UserController');
-var AuthController = require(__root + 'auth/AuthController');
+ 
+var UserController = require('./user/UserController');
+var AuthController = require('./auth/AuthController');
 
 // adding Helmet to enhance your API's security
 app.use(helmet());
