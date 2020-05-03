@@ -7,8 +7,8 @@ var app = express();
 var db = require('./db');
 var config = require('./config');
  
-var UserController = require('./user/UserController');
-var AuthController = require('./auth/AuthController');
+var UserController = require('user/UserController');
+var AuthController = require('auth/AuthController');
 
 // adding Helmet to enhance your API's security
 app.use(helmet());
