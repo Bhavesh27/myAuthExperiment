@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var config = require('../config'); // get config file
-console.log(config);
 var twilio = require('twilio');
 var client = new twilio((process.env.TWILIO_ACCOUNT_SID || config.TWILIO_ACCOUNT_SID), (process.env.TWILIO_AUTHTOKEN || config.TWILIO_AUTHTOKEN));
 
