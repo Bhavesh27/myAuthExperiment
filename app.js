@@ -5,10 +5,13 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
 
-require("./loadConfig")()
+const env = process.env.ENV ? process.env.ENV : "dev"
+
+if (env === 'dev') {
+  require("./loadConfig")()
+}
 
 const db = require('./db');
-const config = require('./config');
  
 const UserController = require('./user/UserController');
 const AuthController = require('./auth/authController');
