@@ -1,2 +1,2 @@
 // config.js
-module.exports = {};
+module.exports = require('./config/config.json');

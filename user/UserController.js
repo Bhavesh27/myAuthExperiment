@@ -1,11 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
+const express = require('express');
+const router = express.Router();
+const bodyParser = require('body-parser');
 
-var VerifyToken = require('../auth/VerifyToken');
+const VerifyToken = require('../auth/VerifyToken');
 
 router.use(bodyParser.urlencoded({ extended: true }));
-var User = require('./User');
+
+const User = require('./User');
 
 // CREATES A NEW USER
 router.post('/', function (req, res) {
