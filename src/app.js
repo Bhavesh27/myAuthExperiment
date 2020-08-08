@@ -1,17 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+
 const app = express();
 
 const env = process.env.ENV ? process.env.ENV : "dev"
 
 if (env === 'dev') {
-  require("./loadConfig")()
+  require("../loadConfig")()
 }
 
-const db = require('./db');
+// db Connection
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
  
 const UserController = require('./user/UserController');
 const AuthController = require('./auth/authController');
@@ -35,6 +38,6 @@ app.use('/api/users', UserController);
 app.use('/api/auth', AuthController);
 app.use(VerifyToken)
 
-app.listen(process.env.PORT, function() {
+app.listen(process.env.PORT, () => {
     console.log('Express server listening on port ' + process.env.PORT);
 });

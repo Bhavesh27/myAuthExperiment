@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
+import jwt from "jsonwebtoken"; // used to create, sign, and verify tokens
 
 function verifyToken(req, res, next) {
 
@@ -18,4 +18,4 @@ function verifyToken(req, res, next) {
   });
 }
 
-module.exports = verifyToken;
+export default verifyToken;

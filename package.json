@@ -4,9 +4,10 @@
   "description": "Backend Server",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "watch": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/app.js",
+    "build": "babel src --out-dir dist",
+    "watch": "nodemon --exec babel-node src/app.js",
+    "test": "mocha --require @babel/register 'src/**/**/**spec.js'"
   },
   "author": "Bhavesh",
   "license": "ISC",
@@ -22,6 +23,10 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
     "nodemon": "^2.0.4"
   }
 }
