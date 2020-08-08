@@ -145,7 +145,7 @@ router.post("/otp-login", function (req, res) {
           }
         );
       } else {
-        if (timestamp - user.otp.get('timestamp') < 300000) {
+        if (timestamp - user.otp.get('timestamp') < 300) {
           return TwilioUtility(
             user.otp.get("value"),
             number,
@@ -207,7 +207,7 @@ router.post("/verify", function (req, res) {
       let otpIsValid = false;
       if (otp === user.otp.get("value")) {
         const timestamp = Math.round(new Date().getTime() / 1000);
-        if (timestamp - user.otp.get("timestamp") < 300000) {
+        if (timestamp - user.otp.get("timestamp") < 300) {
           otpIsValid = true;
         }
       }
@@ -215,7 +215,7 @@ router.post("/verify", function (req, res) {
         return res.status(400).send({
           auth: "failed",
           type: "error",
-          msg: "Invalid OTP. Please Try Again.",
+          msg: "OTP expired or Invalid. Please Try Again.",
         });
 
       if (user.profileComplete) {
@@ -374,7 +374,7 @@ router.post("/resend-otp", function (req, res) {
         );
       } else {
         const timestamp = Math.round(new Date().getTime() / 1000);
-        if (timestamp - user.otp.get("timestamp") < 300000) {
+        if (timestamp - user.otp.get("timestamp") < 300) {
           return TwilioUtility(user.otp.get("value"), number, "reset-otp", res);
         } else {
           User.findByIdAndUpdate(
