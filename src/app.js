@@ -4,11 +4,10 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import loadConfig from './loadConfig';
 
 const env = process.env.ENV ? process.env.ENV : "dev"
 if (env === 'dev') {
-  loadConfig(); 
+  require('../loadConfig')();
 }
 
 import AuthController from './controllers/auth/authController';
