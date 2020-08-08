@@ -1,4 +1,4 @@
-const twilio = require("twilio");
+import twilio from "twilio";
 const client = new twilio(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTHTOKEN
@@ -34,4 +34,4 @@ function TwilioUtility(otp, number, nextStep, res) {
     });
 }
 
-module.exports = TwilioUtility;
+export default TwilioUtility;

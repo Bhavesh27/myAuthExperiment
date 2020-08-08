@@ -1,21 +1,22 @@
-const express = require("express");
-const router = express.Router();
-const bodyParser = require("body-parser");
-const { v4: uuidv4 } = require("uuid");
-
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-
-const TwilioUtility = require("../utility/TwilioUtility");
-const Validator = require("../utility/validator");
-const VerifyToken = require("./VerifyToken");
-const User = require("../user/User");
+import express from 'express';
+import bodyParser from 'body-parser';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * Configure JWT
  */
-const jwt = require("jsonwebtoken"); // used to create, sign, and verify tokens
-const bcrypt = require("bcryptjs");
+import jwt from "jsonwebtoken"; // used to create, sign, and verify tokens
+import bcrypt from "bcryptjs";
+
+const router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
+
+import TwilioUtility from "../../utility/TwilioUtility";
+import Validator from "../../utility/validator";
+
+import VerifyToken from "./VerifyToken";
+import User from "../../model/user/User";
 
 router.post("/login", function (req, res) {
   User.findOne({ email: req.body.email }, function (err, user) {
@@ -396,4 +397,4 @@ router.post("/resend-otp", function (req, res) {
   );
 });
 
-module.exports = router;
+export default router;
