@@ -4,7 +4,7 @@ const client = new twilio(
   process.env.TWILIO_AUTHTOKEN
 );
 
-function TwilioUtility(otp, number, nextStep) {
+function TwilioUtility(otp, number, nextStep, res) {
   client.messages
     .create({
       body: "Welcome User, Here is your OTP to login into your account " + otp,
