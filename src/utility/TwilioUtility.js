@@ -1,10 +1,10 @@
 import twilio from "twilio";
-const client = new twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTHTOKEN
-);
 
 function TwilioUtility(otp, number, nextStep, res) {
+  const client = new twilio(
+    process.env.TWILIO_ACCOUNT_SID,
+    process.env.TWILIO_AUTHTOKEN
+  );
   client.messages
     .create({
       body: "Welcome User, Here is your OTP to login into your account " + otp,

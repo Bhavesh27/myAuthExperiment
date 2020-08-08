@@ -1,8 +1,8 @@
-const envConfig = require("./config");
+import envConfig from "../config";
 const loadConfig = () => {
     for (let k in envConfig) {
         process.env[k] = envConfig[k]
     }
 }
 
-module.exports = loadConfig
+export default loadConfig

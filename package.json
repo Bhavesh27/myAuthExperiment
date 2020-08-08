@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/app.js",
     "build": "babel src --out-dir dist",
-    "watch": "nodemon --exec babel-node src/app.js",
+    "watch": "nodemon --exec babel-node src/app",
     "test": "mocha --require @babel/register 'src/**/**/**spec.js'"
   },
   "author": "Bhavesh",
@@ -19,7 +19,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.11",
     "morgan": "^1.10.0",
-    "twilio": "^3.43.0",
+    "twilio": "^3.48.2",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

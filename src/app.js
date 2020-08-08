@@ -4,21 +4,20 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import loadConfig from './loadConfig';
+
+const env = process.env.ENV ? process.env.ENV : "dev"
+if (env === 'dev') {
+  loadConfig(); 
+}
+
+import AuthController from './controllers/auth/authController';
+import VerifyToken from './controllers/auth/VerifyToken';
 
 const app = express();
 
-const env = process.env.ENV ? process.env.ENV : "dev"
-
-if (env === 'dev') {
-  require("../loadConfig")()
-}
-
 // db Connection
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
- 
-const UserController = require('./user/UserController');
-const AuthController = require('./auth/authController');
-const VerifyToken = require('./auth/VerifyToken');
 
 // adding Helmet to enhance your API's security
 app.use(helmet());
@@ -34,7 +33,6 @@ app.use(morgan('combined'));
 //   res.status(200).send('API works.');
 // });
 
-app.use('/api/users', UserController);
 app.use('/api/auth', AuthController);
 app.use(VerifyToken)
 
