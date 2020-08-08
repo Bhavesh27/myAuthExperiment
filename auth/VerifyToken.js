@@ -13,7 +13,7 @@ function verifyToken(req, res, next) {
       return res.status(401).send({ auth: false, message: 'Failed to authenticate token.' });    
 
     // if everything is good, save to request for use in other routes
-    req.authToken = decoded.id;
+    req.authToken = decoded.authToken;
     next();
   });
 }

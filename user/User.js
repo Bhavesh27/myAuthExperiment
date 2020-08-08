@@ -24,7 +24,8 @@ const UserSchema = new mongoose.Schema({
     required: false
   },
   otp: {
-    type: String,
+    type: Map,
+    of: Number,
     required: true
   },
   authToken: {
